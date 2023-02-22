@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: zendesk_support
+    tables:
+      - name: ticket
+      - name: tickets_for_order_mapping_temp
+      - name: ticket_order_mapping_temp
+      - name: ticket_order_mapping
+
+  - name: core_prod_public
+    tables:
+      - name: fulfillment_orders

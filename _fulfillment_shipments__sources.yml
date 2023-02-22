@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: core_prod_public
+    tables:
+      - name: fulfillment_order_items
+      - name: logistics_external_carrier_shipments
+      - name: logistics_external_carrier_shipping_labels
+      - name: logistics_shipments
+      - name: logistics_shipment_items
+      - name: logistics_shipment_item_actions
+      - name: logistics_shipment_packages
+      - name: logistics_shipment_packages_shipment_items
+
+  - name: reference
+    tables:
+      - name: external_carrier_shipment_status_view
+      - name: shipment_item_action_view
+  
+  - name: view
+    tables:
+      - name: fulfillment_shipments_materialized
+
+  - name: fulfillment_shipments_materialized
+    tables:
+      - name: fulfillment_shipments_temp

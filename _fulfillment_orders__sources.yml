@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: core_prod_public
+    tables:
+      - name: fulfillment_customers
+      - name: fulfillment_customer_addresses
+      - name: fulfillment_orders
+      - name: fulfillment_order_items
+      - name: fulfillment_products
+
+  - name: reference
+    tables:
+      - name: address_iso_codes
+      - name: facilities_view
+      - name: order_platforms
+      - name: order_status_view
+      - name: order_stock_status_view
+      - name: organizations_view
+      - name: shipment_tags_view
+      - name: 
+
+  - name: views
+    tables:
+      - name: appointments
+      - name: fulfillment_orders_materialized
+
+  - name: fivetran_esteem_provide_staging
+    tables:
+      - name: fulfillment_orders_temp
