@@ -1,1 +1,0 @@
-select id from `core_prod_public.appointments` where _fivetran_deleted

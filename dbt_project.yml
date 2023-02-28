@@ -32,8 +32,15 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  appointments:
-    # Config indicated by + and applies to all files under models/example/
-    +materialized: table
-    # example:
-    #   +materialized: view
+  setup_dbt2:
+    appointments:
+      appointments_staging:
+        +materialized: table
+      appointments_final:
+        +materialized: table
+        +pre-hook: 
+          - "delete from `test_dbt.appointments_materialized` where id in (select id from `test_dbt.appointments_temp`)"
+          - "delete from `test_dbt.appointments_materialized` where id in (select id from `core_prod_public.appointments` where _fivetran_deleted)"
+      
+
+on-run-end: "drop table `test_dbt.appointments_temp`"

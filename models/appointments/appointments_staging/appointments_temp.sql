@@ -1,5 +1,7 @@
 -- create or replace table fivetran_esteem_provide_staging.appointments_temp as
 -- (
+{{ config(materialized='table') }}
+
 with items as 
 (
     select * from {{ ref('items')}}
@@ -71,38 +73,4 @@ where   a._fivetran_deleted is false
         and date(a._fivetran_synced) >= current_date()-1
 )
 
-select * from final;
-    
---);
-
--- do I use a posthook here?
-
-{{ config(
-    posthook=[
-        "delete from `views.appointments_materialized` 
-        where id in (select id from fivetran_esteem_provide_staging.appointments_temp)",
-
-        "delete from `views.appointments_materialized` 
-        where id in (select id from `core_prod_public.appointments` where _fivetran_deleted)"
-    ] 
-)
-}}
-
----- The below two queries converted to posthooks ----
--- delete from `views.appointments_materialized` 
--- where   id in {{ ref('delete_staging') }};
-
--- delete from `views.appointments_materialized` 
--- where   id in{{ ref('delete_fivetran') }};
-
-----------------------------------------------------------------
-
----- Replaced by appointments_materialized.sql ----
--- insert `views.appointments_materialized` 
--- select  *
--- from    fivetran_esteem_provide_staging.appointments_temp;
-
-----------------------------------------------------------------
-
----- Moved to appointments_materialized.sql ----
--- drop table fivetran_esteem_provide_staging.appointments_temp;
+select * from final
