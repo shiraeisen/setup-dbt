@@ -36,4 +36,4 @@ jobs:
   schedule: '*/10 * * * *'
   steps:
     - name: run models
-      command: dbt run
+      command: dbt run --select appointments fulfillment_orders fulfillment_shipments ticket_order_mapping
