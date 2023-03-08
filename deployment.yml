@@ -32,8 +32,26 @@ jobs:
 #      - name: version
 #        command: dbt --version
 
-- name: every15minutes
+- name: materialize_apppointments_dbt
   schedule: '*/15 * * * *'
   steps:
-    - name: run models
-      command: dbt run --select appointments fulfillment_orders fulfillment_shipments ticket_order_mapping
+    - name: run model
+      command: dbt run --select appointments 
+
+- name: materialize_fulfillment_orders_dbt
+  schedule: '*/15 * * * *'
+  steps:
+    - name: run model
+      command: dbt run --select fulfillment_orders 
+
+- name: materialize_fulfillment_shipments_dbt
+  schedule: '*/15 * * * *'
+  steps:
+    - name: run model
+      command: dbt run --select fulfillment_shipments
+
+- name: materialize_ticket_order_mapping_dbt
+  schedule: '*/15 * * * *'
+  steps:
+    - name: run model
+      command: dbt run --select ticket_order_mapping
