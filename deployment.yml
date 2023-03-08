@@ -32,8 +32,8 @@ jobs:
 #      - name: version
 #        command: dbt --version
 
-- name: every10minutes
-  schedule: '*/10 * * * *'
+- name: every15minutes
+  schedule: '*/15 * * * *'
   steps:
     - name: run models
       command: dbt run --select appointments fulfillment_orders fulfillment_shipments ticket_order_mapping

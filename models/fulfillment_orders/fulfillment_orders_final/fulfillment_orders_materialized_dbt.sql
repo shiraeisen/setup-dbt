@@ -2,7 +2,7 @@
 
 
 with final as (
-    select * from {{ ref('fulfillment_orders_temp')}}
+    select * from {{ ref('fulfillment_orders_temp_dbt')}}
 )
 
 select  *

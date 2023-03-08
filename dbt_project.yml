@@ -26,54 +26,62 @@ models:
     appointments:
       appointments_staging:
         +materialized: table
-        +schema: fivetran_esteem_provide_staging
+        #+schema: fivetran_esteem_provide_staging
       appointments_final:
         +materialized: table
-        +schema: views
+        #+schema: views
         +pre-hook: 
-          - "delete from `views.appointments_materialized` where id in (select id from `fivetran_esteem_provide_staging.appointments_temp`)"
-          - "delete from `views.appointments_materialized` where id in (select id from `core_prod_public.appointments` where _fivetran_deleted)"
+          - "delete from `dbt_fivetran.appointments_materialized_dbt` where id in (select id from `dbt_fivetran.appointments_temp_dbt`)"
+          - "delete from `dbt_fivetran.appointments_materialized_dbt` where id in (select id from `core_prod_public.appointments` where _fivetran_deleted)"
         +post-hook:
-          - "drop table `fivetran_esteem_provide_staging.appointments_temp`"
+          - "drop table `dbt_fivetran.appointments_temp_dbt`"
+          - "drop table `dbt_fivetran.addresses`"
+          - "drop table `dbt_fivetran.items`"
     
     fulfillment_orders:
       fulfillment_orders_staging:
         +materialized: table
-        +schema: fivetran_esteem_provide_staging
+        #+schema: fivetran_esteem_provide_staging
       fulfillment_orders_final:
         +materialized: table
-        +schema: views
+        #+schema: views
         +pre-hook:
-          - "delete from `views.fulfillment_orders_materialized` where id in (select id from `fivetran_esteem_provide_staging.fulfillment_orders_temp`)"
-          - "delete from `views.fulfillment_orders_materialized` where id in (select id from `core_prod_public.fulfillment_orders` where _fivetran_deleted or deleted_at is not null)"
+          - "delete from `dbt_fivetran.fulfillment_orders_materialized_dbt` where id in (select id from `dbt_fivetran.fulfillment_orders_temp_dbt`)"
+          - "delete from `dbt_fivetran.fulfillment_orders_materialized_dbt` where id in (select id from `core_prod_public.fulfillment_orders` where _fivetran_deleted or deleted_at is not null)"
         +post-hook:
-          - "drop table `fivetran_esteem_provide_staging.fulfillment_orders_temp`"
+          - "drop table `dbt_fivetran.fulfillment_orders_temp_dbt`"
+          - "drop table `dbt_fivetran.order_items`"
+          - "drop table `dbt_fivetran.shipment_tags`"
+          - "drop table `dbt_fivetran.ikea_location_types`"
+          - "drop table `dbt_fivetran.order_position`"
       
     fulfillment_shipments:
       fulfillment_shipments_staging:
         +materialized: table
-        +schema: fivetran_esteem_provide_staging
+        #+schema: fivetran_esteem_provide_staging
       fulfillment_shipments_final:
         +materialized: table
-        +schema: views
+        #+schema: views
         +pre-hook:
-          - "delete from `views.fulfillment_shipments_materialized` where id in (select id from `fivetran_esteem_provide_staging.fulfillment_shipments_temp`)"
-          - "delete from `views.fulfillment_shipments_materialized` where id in (select id from `core_prod_public.logistics_shipments` where _fivetran_deleted or shipping_method_type != 'Logistics::ExternalCarrierShipment')"
+          - "delete from `dbt_fivetran.fulfillment_shipments_materialized_dbt` where id in (select id from `dbt_fivetran.fulfillment_shipments_temp_dbt`)"
+          - "delete from `dbt_fivetran.fulfillment_shipments_materialized_dbt` where id in (select id from `core_prod_public.logistics_shipments` where _fivetran_deleted or shipping_method_type != 'Logistics::ExternalCarrierShipment')"
         +post-hook:
-          - "drop table `fivetran_esteem_provide_staging.fulfillment_shipments_temp`"  
+          - "drop table `dbt_fivetran.fulfillment_shipments_temp_dbt`"  
+          - "drop table `dbt_fivetran.packages`"
+          - "drop table `dbt_fivetran.shipment_items`"
 
     ticket_order_mapping:
       ticket_order_mapping_staging:
         +materialized: table
-        +schema: zendesk_support
+        #+schema: test_dbt_zendesk #zendesk_support
       ticket_order_mapping_intermediate:
         +materialized: table
-        +schema: zendesk_support
+        #+schema: test_dbt_zendesk #zendesk_support
       ticket_order_mapping_final:
         +materialized: table
-        +schema: zendesk_support
+        #+schema: test_dbt_zendesk #zendesk_support
         +pre-hook:
-          - "delete from `zendesk_support.ticket_order_mapping` where ticket_id in (select ticket_id from `zendesk_support.ticket_order_mapping_temp`)"
+          - "delete from `dbt_fivetran.ticket_order_mapping_dbt` where ticket_id in (select ticket_id from `dbt_fivetran.ticket_order_mapping_temp_dbt`)"
         +post-hook:
-          - "drop table `zendesk_support.tickets_for_order_mapping_temp`"
-          - "drop table `zendesk_support.ticket_order_mapping_temp`"
+          - "drop table `dbt_fivetran.tickets_for_order_mapping_temp_dbt`"
+          - "drop table `dbt_fivetran.ticket_order_mapping_temp_dbt`"
