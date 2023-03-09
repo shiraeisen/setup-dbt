@@ -74,8 +74,8 @@ models:
       ticket_order_mapping_staging:
         +materialized: table
         #+schema: test_dbt_zendesk #zendesk_support
-      ticket_order_mapping_intermediate:
-        +materialized: table
+      # ticket_order_mapping_intermediate:
+      #   +materialized: table
         #+schema: test_dbt_zendesk #zendesk_support
       ticket_order_mapping_final:
         +materialized: table
