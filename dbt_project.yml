@@ -30,13 +30,13 @@ models:
       appointments_final:
         +materialized: table
         +schema: dbt_fivetran #views
-        +pre-hook: 
-          - "delete from `dbt_fivetran.appointments_materialized_dbt` where id in (select id from `dbt_fivetran.appointments_temp_dbt`)"
-          - "delete from `dbt_fivetran.appointments_materialized_dbt` where id in (select id from `core_prod_public.appointments` where _fivetran_deleted)"
-        +post-hook:
-          - "drop table `dbt_fivetran.appointments_temp_dbt`"
-          - "drop table `dbt_fivetran.addresses`"
-          - "drop table `dbt_fivetran.items`"
+        # +pre-hook: 
+        #   - "delete from `dbt_fivetran.appointments_materialized_dbt` where id in (select id from `dbt_fivetran.appointments_temp_dbt`)"
+        #   - "delete from `dbt_fivetran.appointments_materialized_dbt` where id in (select id from `core_prod_public.appointments` where _fivetran_deleted)"
+        # +post-hook:
+        #   - "drop table `dbt_fivetran.appointments_temp_dbt`"
+        #   - "drop table `dbt_fivetran.addresses`"
+        #   - "drop table `dbt_fivetran.items`"
     
     fulfillment_orders:
       fulfillment_orders_staging:
