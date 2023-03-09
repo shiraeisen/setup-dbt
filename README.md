@@ -10,7 +10,9 @@ The tables that materialize via the transformations contained in this repo inclu
 
 These tables materialize into [iron-zodiac-336013.dbt_fivetran](https://console.cloud.google.com/bigquery?referrer=search&cloudshell=false&project=iron-zodiac-336013&supportedpurview=project&ws=!1m4!1m3!3m2!1siron-zodiac-336013!2sdbt_fivetran)
 
-### Instructions / Good-to-Know's:
-- dbt_project.yml orchestrates how/where each of the four models are built
-- deployment.yml can determine the cadence at which the models are run, or this can be set when the transformations are built in fivetran
-- fivetran syncs with this repo whenever changes are made - no action is required for fivetran to use the most recent version 
+### Resources:
+- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
+- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
+- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
+- Find [dbt events](https://events.getdbt.com) near you
+- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
