@@ -50,8 +50,8 @@ jobs:
 #     - name: run model
 #       command: dbt run --select fulfillment_shipments
 
-# - name: materialize_ticket_order_mapping_dbt
-#   schedule: '*/15 * * * *'
-#   steps:
-#     - name: run model
-#       command: dbt run --select ticket_order_mapping
+- name: ticket_order_mapping_dbt
+  schedule: '*/15 * * * *'
+  steps:
+    - name: run model
+      command: dbt run --select ticket_order_mapping
