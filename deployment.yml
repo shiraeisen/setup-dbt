@@ -56,8 +56,8 @@ jobs:
     - name: run model
       command: dbt run --select ticket_order_mapping
 
-- name: appointments_incremental
-  schedule: '*/15 * * * *'
-  steps:
-    - name: run model
-      command: dbt run --select appointments_incremental
+# - name: appointments_incremental
+#   schedule: '*/15 * * * *'
+#   steps:
+#     - name: run model
+#       command: dbt run --select appointments_incremental
