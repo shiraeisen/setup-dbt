@@ -27,4 +27,5 @@ from    `core_prod_public.logistics_shipments` s
         left outer join `iron-zodiac-336013.reference.external_carrier_shipment_status_view` ecss on ecs.status=ecss.id
 where   s._fivetran_deleted is false
         and shipping_method_type = 'Logistics::ExternalCarrierShipment' -- consider only external carrier shipment       
-        and (date(s._fivetran_synced) >= current_date()-1 or date(ecs._fivetran_synced) >= current_date()-1)
+        --and (date(s._fivetran_synced) >= current_date()-1 or date(ecs._fivetran_synced) >= current_date()-1)
+        

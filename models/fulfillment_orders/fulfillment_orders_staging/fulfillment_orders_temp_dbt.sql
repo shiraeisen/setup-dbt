@@ -65,4 +65,5 @@ from    `core_prod_public.fulfillment_orders` o
         left outer join `reference.order_platforms` op on cast(o.platform as string)=op.id
 where   ifnull(o._fivetran_deleted,false) is false
         and o.deleted_at is null
-        and date(o._fivetran_synced) >= current_date()-1
+        --and date(o._fivetran_synced) >= current_date()-1
+        

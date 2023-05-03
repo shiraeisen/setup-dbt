@@ -70,7 +70,8 @@ from    `core_prod_public.appointments` a
         left outer join addresses aa on a.id=aa.appointment_id
         left outer join `iron-zodiac-336013.core_prod_public.logistics_shipments` ls on a.id=ls.shipping_method_id and ls._fivetran_deleted is false
 where   a._fivetran_deleted is false
-        and date(a._fivetran_synced) >= current_date()-1
+        --and date(a._fivetran_synced) >= current_date()-1
+        
 )
 
 select * from final
