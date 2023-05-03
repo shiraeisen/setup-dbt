@@ -28,4 +28,4 @@ from    `core_prod_public.logistics_shipments` s
 where   s._fivetran_deleted is false
         and shipping_method_type = 'Logistics::ExternalCarrierShipment' -- consider only external carrier shipment       
         --and (date(s._fivetran_synced) >= current_date()-1 or date(ecs._fivetran_synced) >= current_date()-1)
-        
+        and s.created_at >= '2023-04-15'
