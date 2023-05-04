@@ -66,4 +66,4 @@ from    `core_prod_public.fulfillment_orders` o
 where   ifnull(o._fivetran_deleted,false) is false
         and o.deleted_at is null
         --and date(o._fivetran_synced) >= current_date()-1
-        and o.created_at >= '2023-04-15'
+        and o.created_at >= '2023-03-01'
