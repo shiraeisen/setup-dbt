@@ -18,6 +18,7 @@ final as
         a.id, 
         a.number name, 
         cast(job_type as string) type_id, t.name type_name, 
+        cast(job_subtype as string) job_subtype,
         cast(status as string) status_id, s.name status_name, 
         tb.service_area_id service_area_id, upper(r.name) service_area_name,
         tb.base_date delivery_date, 
