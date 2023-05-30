@@ -1,4 +1,16 @@
-{{ config(materialized='table') }}
+{{
+    config(
+        materialized='incremental',
+        unique_key='id',
+        incremental_strategy='insert_overwrite',
+        on_schema_change='sync_all_columns',
+        partition_by={
+            'field': 'created_at',
+            'data_type': 'timestamp',
+            'granularity': 'day'
+        }
+    )
+}}
 
 with order_items as 
 (
@@ -13,8 +25,9 @@ shipment_tags as
 ikea_location_types as 
 (
     select * from {{ ref('ikea_location_types_incremental')}}
-)
+),
 
+final as (
 select  o.id, 
         timestamp(o.created_at) created_at, 
         cancelled is_cancelled,
@@ -68,3 +81,10 @@ from    `core_prod_public.fulfillment_orders` o
 where   ifnull(o._fivetran_deleted,false) is false
         and o.deleted_at is null
         and date(o._fivetran_synced) >= current_date()-1
+)
+
+select * from final
+
+{% if is_incremental() %}
+    where date(created_at) between date_sub(current_date(), interval 1 year) and current_date()
+{% endif %}

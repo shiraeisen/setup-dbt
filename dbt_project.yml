@@ -42,10 +42,8 @@ models:
       appointments_final_incremental:
         +materialized: incremental
         +pre-hook: 
-          - "delete from `dbt_fivetran.appointments_materialized_dbt_incremental` where id in (select id from `dbt_fivetran.appointments_temp_dbt_incremental`)"
           - "delete from `dbt_fivetran.appointments_materialized_dbt_incremental` where id in (select id from `core_prod_public.appointments` where _fivetran_deleted)"
         +post-hook:
-          - "drop table `dbt_fivetran.appointments_temp_dbt_incremental`"
           - "drop table `dbt_fivetran.addresses_incremental`"
           - "drop table `dbt_fivetran.items_incremental`"
 
@@ -70,10 +68,8 @@ models:
       fulfillment_orders_final_incremental:
         +materialized: incremental
         +pre-hook:
-          - "delete from `dbt_fivetran.fulfillment_orders_materialized_dbt_incremental` where id in (select id from `dbt_fivetran.fulfillment_orders_temp_dbt_incremental`)"
           - "delete from `dbt_fivetran.fulfillment_orders_materialized_dbt_incremental` where id in (select id from `core_prod_public.fulfillment_orders` where _fivetran_deleted or deleted_at is not null)"
         +post-hook:
-          - "drop table `dbt_fivetran.fulfillment_orders_temp_dbt_incremental`"
           - "drop table `dbt_fivetran.order_items_incremental`"
           - "drop table `dbt_fivetran.shipment_tags_incremental`"
           - "drop table `dbt_fivetran.ikea_location_types_incremental`"
@@ -98,10 +94,8 @@ models:
       fulfillment_shipments_final_incremental:
         +materialized: incremental
         +pre-hook:
-          - "delete from `dbt_fivetran.fulfillment_shipments_materialized_dbt_incremental` where id in (select id from `dbt_fivetran.fulfillment_shipments_temp_dbt_incremental`)"
           - "delete from `dbt_fivetran.fulfillment_shipments_materialized_dbt_incremental` where id in (select id from `core_prod_public.logistics_shipments` where _fivetran_deleted or shipping_method_type != 'Logistics::ExternalCarrierShipment')"
         +post-hook:
-          - "drop table `dbt_fivetran.fulfillment_shipments_temp_dbt_incremental`"  
           - "drop table `dbt_fivetran.packages_incremental`"
           - "drop table `dbt_fivetran.shipment_items_incremental`"
 
