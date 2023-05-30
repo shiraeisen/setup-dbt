@@ -2,13 +2,8 @@
     config(
         materialized='incremental',
         unique_key='id',
-        incremental_strategy='insert_overwrite',
+        incremental_strategy='merge',
         on_schema_change='sync_all_columns',
-        partition_by={
-            'field': 'created_at',
-            'data_type': 'timestamp',
-            'granularity': 'day'
-        }
     )
 }}
 
@@ -85,6 +80,3 @@ where   ifnull(o._fivetran_deleted,false) is false
 
 select * from final
 
-{% if is_incremental() %}
-    where date(created_at) between date_sub(current_date(), interval 1 year) and current_date()
-{% endif %}
