@@ -30,6 +30,7 @@ ikea_location_types as
 
 final as (
 select  o.id, 
+        o.fulfillment_customer_id,
         timestamp(o.created_at) created_at, 
         cancelled is_cancelled,
         timestamp(o.cancelled_at) cancelled_at,
