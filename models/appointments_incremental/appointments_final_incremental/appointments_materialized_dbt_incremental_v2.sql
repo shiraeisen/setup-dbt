@@ -3,7 +3,13 @@
         materialized='incremental',
         unique_key='id',
         incremental_strategy='merge',
+        cluster_by='id',
         on_schema_change='sync_all_columns',
+        partition_by={
+            'field': 'delivery_date',
+            'data_type': 'date',
+            'granularity': 'day'
+        }
         
     )
 }}
@@ -80,11 +86,13 @@ where   a._fivetran_deleted is false
         and date(a._fivetran_synced) >= current_date()-1
 )
 
-select * from final 
+-- select * from final 
 
--- select f.*except(failed_reason_name, status_name), fr.name failed_reason_name, s.name status_name
--- from final
--- left outer join `iron-zodiac-336013.reference.appointment_failed_reason` fr on a.failed_reason_id=fr.id
--- left outer join `iron-zodiac-336013.reference.appointment_status_view` s on a.status_id=s.id
-
+select 
+    *except(job_subtype), initcap(replace(job_subtype,'_',' ')) job_subtype
+    -- f.*except(failed_reason_name, status_name, job_subtype), 
+    -- fr.name failed_reason_name, s.name status_name, initcap(replace(f.job_subtype,'_',' ')) job_subtype
+from final
+-- left outer join `iron-zodiac-336013.reference.appointment_failed_reason` fr on f.failed_reason_id=fr.id
+-- left outer join `iron-zodiac-336013.reference.appointment_status_view` s on f.status_id=s.id
 

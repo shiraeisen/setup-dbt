@@ -3,8 +3,13 @@
         materialized='incremental',
         unique_key='id',
         incremental_strategy='merge',
+        cluster_by='id',
         on_schema_change='sync_all_columns',
-        
+        partition_by={
+            'field': 'shipped_at',
+            'data_type': 'timestamp',
+            'granularity': 'day'
+        }
     )
 }}
 

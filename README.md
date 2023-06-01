@@ -3,9 +3,9 @@ This repo orchestrates the dbt transformations to materialize tables through fiv
 ### Models
 
 The tables that materialize via the transformations contained in this repo include:
-- appointments_materialized_dbt
-- fulfillment_orders_materialized_dbt
-- fulfillment_shipments_materialized_dbt
+- appointments_materialized_dbt_incremental
+- fulfillment_orders_materialized_dbt_incremental
+- fulfillment_shipments_materialized_dbt_incremental
 - ticket_order_mapping_dbt
 
 These tables materialize into [iron-zodiac-336013.dbt_fivetran](https://console.cloud.google.com/bigquery?referrer=search&cloudshell=false&project=iron-zodiac-336013&supportedpurview=project&ws=!1m4!1m3!3m2!1siron-zodiac-336013!2sdbt_fivetran)
