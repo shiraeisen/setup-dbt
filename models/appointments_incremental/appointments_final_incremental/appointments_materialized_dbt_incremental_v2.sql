@@ -70,7 +70,8 @@ final as
         ls.shipment_number shipment_name,
         timestamp(a.completed_at) completed_at,
         a.logistics_time_box_id,-- new timeslot/timebox_id 
-        timestamp(a.created_at) created_at
+        timestamp(a.created_at) created_at,
+        cast(a.claim_number as string) claim_number
 from    `core_prod_public.appointments` a
         left outer join `core_prod_public.fulfillment_customer_addresses` fca on a.location_id=fca.id and fca._fivetran_deleted is false
         left outer join `reference.appointment_type_view` t on cast(a.job_type as string)=t.id
