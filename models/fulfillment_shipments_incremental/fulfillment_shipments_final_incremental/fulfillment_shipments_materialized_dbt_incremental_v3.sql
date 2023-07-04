@@ -8,7 +8,7 @@
         partition_by={
             'field': 'shipped_at',
             'data_type': 'timestamp',
-            'granularity': 'day'
+            'granularity': 'month'
         }
     )
 }}
