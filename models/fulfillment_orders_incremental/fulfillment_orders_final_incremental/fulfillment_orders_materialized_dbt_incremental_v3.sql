@@ -68,7 +68,8 @@ select  o.id,
         cast(platform as string) platform_id,
         op.name platform_name,
         timestamp(latest_booking_email_sent_at) latest_booking_email_sent_at,
-        o.shipping_service
+        o.shipping_service,
+        o.sales_channel
 from    `core_prod_public.fulfillment_orders` o
         left outer join order_items oi on o.id=oi.fulfillment_order_id
         left outer join shipment_tags st on o.id=st.fulfillment_order_id
