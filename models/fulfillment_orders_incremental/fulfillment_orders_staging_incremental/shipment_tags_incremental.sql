@@ -2,7 +2,7 @@
 
 select  o.id fulfillment_order_id, 
           array_agg(struct(
-            st as id,
+            json_extract_scalar(st) as id,
             name
           )) shipment_tags,
           replace(replace(replace(replace(to_json_string(array_agg(stv.name order by stv.id)),'[',''),']',''),',',' | '),'"','') all_shipment_tags,
