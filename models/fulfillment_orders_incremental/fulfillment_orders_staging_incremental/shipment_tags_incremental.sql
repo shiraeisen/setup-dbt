@@ -9,6 +9,6 @@ select  o.id fulfillment_order_id,
           count(*) count_shipment_tags
 from    `core_prod_public.fulfillment_orders` o
         left outer join unnest(json_extract_array(shipment_tags)) st
-        left outer join `reference.shipment_tags_view` stv on st=stv.id
+        left outer join `reference.shipment_tags_view` stv on JSON_EXTRACT_SCALAR(st)=stv.id
 where   ifnull(o._fivetran_deleted,false) is false and o.deleted_at is null 
 group by fulfillment_order_id
