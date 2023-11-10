@@ -45,6 +45,7 @@ models:
         +post-hook:
           - "drop table `dbt_fivetran.order_items_incremental`"
           - "drop table `dbt_fivetran.shipment_tags_incremental`"
+          - "drop table `dbt_fivetran.formatted_tags_incremental`"
           - "drop table `dbt_fivetran.ikea_location_types_incremental`"
           - "drop table `dbt_fivetran.order_position_incremental`"
       
