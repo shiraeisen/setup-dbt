@@ -65,7 +65,7 @@ jobs:
 # Run models every 15 minutes on weekdays, and every hour on weekends
 
 - name: orders_weekdays
-  schedule: '*/15 * * * 1-5'
+  schedule: '*/30 * * * 1-5'
   steps:
     - name: run fulfillment_order model weekdays
       command: dbt run --select fulfillment_orders_incremental
