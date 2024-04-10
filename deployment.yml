@@ -67,14 +67,14 @@ jobs:
 - name: orders_weekdays
   schedule: '*/15 * * * 1-5'
   steps:
-    - name: run model
-     command: dbt run --select fulfillment_orders_incremental
+    - name: run fulfillment_order model weekdays
+      command: dbt run --select fulfillment_orders_incremental
 
 - name: orders_weekends
   schedule: '0 * * * 6-7'
   steps:
-    - name: run model
-     command: dbt run --select fulfillment_orders_incremental
+    - name: run fulfillment_order model weekends
+      command: dbt run --select fulfillment_orders_incremental
 
 
   
